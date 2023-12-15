@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+  }
+  
+  .form-label {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .card {
+    width: 25rem;
+    border: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  
+  .fa {
+   
+      position: relative;
+      
+      bottom: 28px;
+      left: 336px;
+  }
+  

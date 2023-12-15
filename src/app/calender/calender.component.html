@@ -1,0 +1,107 @@
+<div style="display: flex; justify-content: center;">
+    <button     mat-icon-button
+    matTooltip="Previous Month"
+    [matTooltipPosition]="'above'"
+    class="iconsSize ml-1 my-auto"
+    
+    (click)="previousmonth()">
+        <mat-icon> 
+            chevron_left
+        </mat-icon>
+    </button>
+    <h4>{{date.format('MMMM ')}}{{date.format('YYYY ')}}</h4>
+    <span class="material-icons" style="padding: 7px; font-size: 10px;">
+          event
+      </span>
+      <button
+    mat-icon-button
+    matTooltip="Next Month"
+    [matTooltipPosition]="'above'"
+    class="iconsSize ml-1 my-auto"
+    (click)="nextmonth()"
+  >
+    <mat-icon>
+      chevron_right
+    </mat-icon>
+  </button>
+</div>
+<div *ngFor="let calendarItem of calendar; let i = index">
+  <div class="flex-container flex-center">
+    <div class="calendar-days" [class.weekend]="day.isWeekend" [ngClass]="day.className" *ngFor="let day of calendarItem"  (click)="openModal(day)">
+      <div *ngIf="i === 0">{{day.dayName}}</div>
+      <div > {{day.day}}</div>
+
+    </div>
+  </div>
+
+  </div>
+  
+  <div class="modal" tabindex="-1"     id="exampleModal" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Scheduler</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+
+          <input type="text" style=" border: 0;
+          outline: 0;
+          background: transparent;
+          border-bottom: 1px solid black;"
+          placeholder="Add tittle and time;"
+          name="meetingTitle"
+          [(ngModel)]="meetingTitle"
+          [ngModelOptions]=" 
+             {standalone: true}"
+         
+          >
+
+          <div>
+            <button type="button" class="btn" [ngClass]="{'btn-primary': isEventViewActive}" (click)="showEventView()">Event</button>
+            <button type="button" class="btn" [ngClass]="{'btn-primary': isTaskViewActive}" (click)="showTaskView()">Task</button>
+          </div>
+
+          <div *ngIf="isEventView" >
+            <input type="date" class="event" [(ngModel)]="startDate" placeholder="Start Date" [ngModelOptions]=" 
+            {standalone: true}" >
+          __
+          <input type="date" class="event" [(ngModel)]="endDate" placeholder="End Date" [ngModelOptions]=" 
+          {standalone: true}">
+          <div>
+          <button (click)="showInputs = !showInputs" style="border-radius: 5px; margin: 5px;">Add Time</button>
+          <div *ngIf="showInputs">
+            <input type="time" [(ngModel)]="startTime" [ngModelOptions]=" 
+            {standalone: true}">
+            <input type="time" [(ngModel)]="endTime" [ngModelOptions]=" 
+            {standalone: true}">
+          </div>
+        </div>
+        <select name="dropdown" id="dropdown">
+          <option value="volvo">Does not repeat</option>
+          <option value="saab">Daily</option>
+          <option value="opel">Weekly on Monday</option>
+          <option value="audi">Every weekday (Monday to Friday)</option>
+          <option value="audi">Custom...</option>
+
+        </select>
+        <div class="mb-3">
+          <label [(ngModel)]="description" [ngModelOptions]=" 
+          {standalone: true}">Description</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <label for="myfile">Attach a file :</label>
+        <input type="file" id="myfile" name="myfile">        </div>
+          <div *ngIf="!isEventView">
+            <input type="text" class="event" placeholder="Add task title and time">
+          </div>
+        </div>
+       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="saveMeeting()">Save changes</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  
+

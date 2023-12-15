@@ -1,0 +1,68 @@
+.container{
+  
+ 
+    margin: 20px;
+    padding: 0;
+}
+.card{
+   
+    background-color: hsl(240deg 73.33% 97.06%);
+    border-radius: 16px;
+}
+.search-input{
+margin: 15px;
+border-radius: 10px;
+
+}
+.user-item {
+    margin-bottom: 10px;
+  }
+  .chat-box {
+    height: 550px;
+    overflow-y: auto;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  .message {
+    margin-bottom: 10px;
+    
+  }
+
+
+  .name{
+    margin: 10px;
+    border-bottom: 1px solid;
+    padding: 5px;
+  }
+  .message-conatiner{
+    position: static;
+    bottom: 0px;
+  }
+  
+.my-message {
+  float: right;
+  background-color: rgb(140, 185, 225);
+
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+  margin-right: 10px;
+}
+.other-message{
+ background-color:rgb(195, 229, 218) ;
+ 
+ padding: 6px;
+ font-size: 13px;
+ font-weight: 500;
+ border-radius: 5px;
+ width: fit-content;
+ margin: 0px;
+}

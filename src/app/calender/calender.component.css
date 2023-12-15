@@ -1,0 +1,45 @@
+
+.calendar-days {
+    width: 155px;
+    height: 120px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 3px;
+  
+    &.previous-month,
+    &.next-month {
+      color: grey;
+    }
+  
+    &.weekend {
+      background-color: rgb(245, 245, 245);
+    }
+  
+  }
+  
+  .flex-container {
+    display: -webkit-flex;
+    display: flex;
+  }
+  
+  .flex-center {
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+  .class{
+    border: 0; outline: 0; background: transparent; border-bottom: 1px solid black;
+  }
+  .btn-primary{
+    margin: 5px;
+    padding: 2px;
+    font-size: 14px ;
+    
+      background-color: #007bff;
+      color: white;
+    
+  }
+  .modal-content{
+    background-color: #e2e0e0;
+  }

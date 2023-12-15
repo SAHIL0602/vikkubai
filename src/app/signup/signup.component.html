@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h2 style="align-items: center;">Sign Up</h2>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" formControlName="name">
+            
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email">
+            
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Phone No.</label>
+            <input type="number" class="form-control" id="phoneno" formControlName="phoneno">
+            
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+            
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary" id="signUp" [disabled]="!myForm.valid">Sign Up</button>
+  
+            </div>
+  
+            <div class="col-8" style="font-size: 14px; font-weight: 400; margin-top: auto">Already have an account? <a
+                routerLink="/">Log in</a>
+            </div>
+          </div>
+       
+  
+      </div>

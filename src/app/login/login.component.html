@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h2>Login</h2>
+      
+                <div class="mb-3">
+                   
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="email"
+                    name="email" />
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <div>
+                        <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" id="exampleInputPassword1" name="password" [(ngModel)]="password"/>
+                        <span (click)="togglePasswordVisibility()">
+                            <i class="fa" [ngClass]="{'fa-eye': showPassword, 'fa-eye-slash': !showPassword}"></i>
+                          </span>
+                    </div>
+              
+                </div>
+                <div *ngIf="loginError" class="text-danger">Email or password is incorrect.</div>
+
+                <div class="row">
+                    <div class="col-2 mt-2">
+                        <button type="submit" class="btn btn-primary" #loginButton (click)="getUsers()"
+                            >Login</button>
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-6" style="font-size: 14px; font-weight: 400; margin-top: auto">
+                        create an account
+                        <a routerLink="/signup">Sign up</a>
+                    </div>
+                </div>
+          
+        </div>
+    </div>
+</div> 
+
