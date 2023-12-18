@@ -7,7 +7,7 @@ interface CalendarItem {
   date: string;
   className: string;
   isWeekend: boolean;
-  
+  events:any[];
 }
 
   @Component({
@@ -19,7 +19,7 @@ interface CalendarItem {
  
   export class CalenderComponent implements OnInit {
   date = moment();
-  calendar: Array<CalendarItem[]> = [];
+  calendar:any[] = [];
   showModal : boolean = false;
   selectedDate: CalendarItem | null =null
   isEventView: boolean = true;
@@ -31,8 +31,8 @@ interface CalendarItem {
   meetingTitle: string = '';
   startDate: any ;
   endDate: any ;
-  
-  description: string = '';
+  events:any[] = []
+  description: string = " ";
 
   ngOnInit(): void {
     this.calendar = this.createCalendar(this.date);
@@ -43,7 +43,7 @@ interface CalendarItem {
     const startOfMonth = month.startOf('months').format('ddd');
     const endOfMonth = month.endOf('months').format('ddd');
     const weekdaysShort = moment.weekdaysShort();
-    const calendar: CalendarItem[] = [];
+    const calendar: any[] = [];
 
     const daysBefore = weekdaysShort.indexOf(startOfMonth);
     const daysAfter = weekdaysShort.length - 1 - weekdaysShort.indexOf(endOfMonth);
@@ -91,6 +91,7 @@ interface CalendarItem {
       date:data.format('DD-MM-YYYY'),
       className,
       isWeekend: dayName === 'Sun' || dayName === 'Sat',
+      
     }
   }
   public nextmonth() {
@@ -150,7 +151,7 @@ console.log(this.startDate,this.selectedDate);
 saveMeeting(){
 
   
-console.log(this.selectedDate);
+console.log(this.selectedDate );
 
 
     if (this.selectedDate) {
@@ -158,26 +159,42 @@ console.log(this.calendar);
 
 var newEvent
 
-      for (let i = 0; i < this.calendar.length; i++) {
-        if ( this.calendar[i] ) {
+      for (let i = 0; i <= this.calendar.length; i++) {
+        console.log(this.calendar[i]);
+        
+for(let j=0; j<=this.calendar[i].length;j++){
 
-          newEvent  = {
-            title: this.meetingTitle,
-            startDate: this.startDate,
-            endDate: this.endDate,
-            startTime: this.startTime,
-            endTime: this.endTime,
-            description: this.description
-          };
-          // this.calendar.events.push(newEvent);
-         
-          
-        }
+  console.log(this.calendar[i][j],j);
+  
+  const calendarDate = this.calendar[i][j]
+
+  if ( calendarDate >=this.startDate && calendarDate <= this.endDate) {
+
+    newEvent  = {
+      title: this.meetingTitle,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      startTime: this.startTime,
+      endTime: this.endTime,
+      description: this.description
+    };
+    
+    
+    
+  }
+  
+}
        
+        
+        // this.events.push(newEvent)
+        // this.calendar[i].push(this.events)
+        // console.log(this.calendar[i][0]);
+       
+      
       }
-      console.log(newEvent);
+     
+      // console.log(newEvent); 
     }
-
   }
 }
 

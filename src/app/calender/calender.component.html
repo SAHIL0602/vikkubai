@@ -63,17 +63,17 @@
           </div>
 
           <div *ngIf="isEventView" >
-            <input type="date" class="event" [(ngModel)]="startDate" placeholder="Start Date" [ngModelOptions]=" 
+            <input type="date" class="event" name="startDate" [(ngModel)]="startDate" placeholder="Start Date" [ngModelOptions]=" 
             {standalone: true}" >
           __
-          <input type="date" class="event" [(ngModel)]="endDate" placeholder="End Date" [ngModelOptions]=" 
+          <input type="date" class="event" name="endDate" [(ngModel)]="endDate" placeholder="End Date" [ngModelOptions]=" 
           {standalone: true}">
           <div>
           <button (click)="showInputs = !showInputs" style="border-radius: 5px; margin: 5px;">Add Time</button>
           <div *ngIf="showInputs">
-            <input type="time" [(ngModel)]="startTime" [ngModelOptions]=" 
+            <input type="time" name="startTime" [(ngModel)]="startTime" [ngModelOptions]=" 
             {standalone: true}">
-            <input type="time" [(ngModel)]="endTime" [ngModelOptions]=" 
+            <input type="time" name="endTime" [(ngModel)]="endTime" [ngModelOptions]=" 
             {standalone: true}">
           </div>
         </div>
@@ -86,9 +86,9 @@
 
         </select>
         <div class="mb-3">
-          <label [(ngModel)]="description" [ngModelOptions]=" 
-          {standalone: true}">Description</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <label >Description</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" [(ngModel)]="description" [ngModelOptions]=" 
+          {standalone: true}"></textarea>
         </div>
         <label for="myfile">Attach a file :</label>
         <input type="file" id="myfile" name="myfile">        </div>

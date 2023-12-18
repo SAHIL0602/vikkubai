@@ -16,6 +16,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalenderComponent } from './calender/calender.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatIconModule } from '@angular/material/icon';
     AngularFirestoreModule,
     FormsModule,
     MatTooltipModule,
-    MatIconModule 
+    MatIconModule,
+    CommonModule
   
 
   
