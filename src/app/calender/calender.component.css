@@ -41,5 +41,11 @@
     
   }
   .modal-content{
-    background-color: #e2e0e0;
+    background-color: #eae5e5;
   }
+ 
+  
+.modal-dialog{
+  width: 25%;
+
+}

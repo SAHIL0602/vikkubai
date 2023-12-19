@@ -17,6 +17,7 @@ import { CalenderComponent } from './calender/calender.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { ModalModule } from 'ng-modal-lib';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     MatTooltipModule,
     MatIconModule,
-    CommonModule
+    CommonModule,
+    ModalModule
   
 
   

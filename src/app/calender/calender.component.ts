@@ -164,11 +164,12 @@ var newEvent
         
 for(let j=0; j<=this.calendar[i].length;j++){
 
-  console.log(this.calendar[i][j],j);
+ const start = new Date(this.startDate);
+ const end = new Date(this.endDate);
   
-  const calendarDate = this.calendar[i][j]
-
-  if ( calendarDate >=this.startDate && calendarDate <= this.endDate) {
+  var calendarDate = (this.calendar[i][j]?.date);
+  calendarDate =new Date(calendarDate)
+  if ( calendarDate >=start && calendarDate <= end) {
 
     newEvent  = {
       title: this.meetingTitle,
@@ -179,21 +180,17 @@ for(let j=0; j<=this.calendar[i].length;j++){
       description: this.description
     };
     
-    
+   
+
+    this.calendar[i][j].events.push(newEvent);
     
   }
-  
+
 }
-       
-        
-        // this.events.push(newEvent)
-        // this.calendar[i].push(this.events)
-        // console.log(this.calendar[i][0]);
        
       
       }
      
-      // console.log(newEvent); 
     }
   }
 }
