@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { EventDetailsDialogComponent } from '../event-details-dialog/event-details-dialog.component';
+
 
 interface CalendarItem {
   day: string;
@@ -18,6 +21,8 @@ interface CalendarItem {
 
  
   export class CalenderComponent implements OnInit {
+    constructor(private dialog: MatDialog) {}
+
   date = moment();
   calendar:any[] = [];
   showModal : boolean = false;
@@ -35,73 +40,61 @@ interface CalendarItem {
   description: string = " ";
 
   ngOnInit(): void {
-    this.calendar = this.createCalendar(this.date);
+    this.createCalendar(this.date);
   }
 
   createCalendar(month: moment.Moment) {
     const daysInMonth = month.daysInMonth();
-    const startOfMonth = month.startOf('months').format('ddd');
-    const endOfMonth = month.endOf('months').format('ddd');
+    const startOfMonth = month.startOf('month').format('ddd');
+    const endOfMonth = month.endOf('month').format('ddd');
     const weekdaysShort = moment.weekdaysShort();
     const calendar: any[] = [];
 
     const daysBefore = weekdaysShort.indexOf(startOfMonth);
     const daysAfter = weekdaysShort.length - 1 - weekdaysShort.indexOf(endOfMonth);
 
-    const clone = month.startOf('months').clone();
+    const clone = month.startOf('month').clone();
     if (daysBefore > 0) {
       clone.subtract(daysBefore, 'days');
     }
 
-    for (let i = 0; i < daysBefore; i++) {
-      calendar.push(this.createCalendarItem(clone, 'previous-month'));
+    
+    for (let i = 0; i < daysInMonth + daysBefore; i++) {
+      const className =
+        i < daysBefore || i >= daysInMonth + daysBefore
+          ? 'other-month'
+          : 'in-month';
+
+      const dayName = weekdaysShort[clone.day()];
+      const day = clone.format('DD');
+      const date = clone.format('YYYY-MM-DD');
+
+      const calendarItem: CalendarItem = {
+        day ,
+        dayName,
+        date,
+        className,
+        isWeekend: dayName === 'Sun' || dayName === 'Sat',
+        events: [],
+      };
+
+      calendar.push(calendarItem);
       clone.add(1, 'days');
     }
 
-    for (let i = 0; i < daysInMonth; i++) {
-      calendar.push(this.createCalendarItem(clone, 'in-month'));
-      clone.add(1, 'days');
-    }
+    this.calendar = calendar;
 
-    for (let i = 0; i < daysAfter; i++) {
-      calendar.push(this.createCalendarItem(clone, 'next-month'));
-      clone.add(1, 'days');
-    }
     console.log(calendar);
-
-    return calendar.reduce((pre: Array<CalendarItem[]>, curr: CalendarItem) => {
-      if (pre[pre.length - 1].length < weekdaysShort.length) {
-        pre[pre.length - 1].push(curr);
-      } else {
-        pre.push([curr]);
-      }
-      return pre;
-    }, [[]]);
-
-
-    
-    
   }
 
-  createCalendarItem(data: moment.Moment, className: string) {
-    const dayName = data.format('ddd');
-    return {
-      day: data.format('DD'),
-      dayName,
-      date:data.format('DD-MM-YYYY'),
-      className,
-      isWeekend: dayName === 'Sun' || dayName === 'Sat',
-      
-    }
-  }
   public nextmonth() {
     this.date.add(1, 'months');
-    this.calendar = this.createCalendar(this.date);
+    this.createCalendar(this.date);
   }
 
   public previousmonth() {
     this.date.subtract(1, 'months');
-    this.calendar = this.createCalendar(this.date);
+   this.createCalendar(this.date);
   }
   
   openModal(date: CalendarItem){
@@ -148,6 +141,8 @@ console.log(this.startDate,this.selectedDate);
  
 }
 
+
+
 saveMeeting(){
 
   
@@ -157,42 +152,45 @@ console.log(this.selectedDate );
     if (this.selectedDate) {
 console.log(this.calendar);
 
-var newEvent
+var newEvent 
 
-      for (let i = 0; i <= this.calendar.length; i++) {
-        console.log(this.calendar[i]);
-        
-for(let j=0; j<=this.calendar[i].length;j++){
-
- const start = new Date(this.startDate);
- const end = new Date(this.endDate);
+newEvent  = {
+  title: this.meetingTitle,
+  startDate: this.startDate,
+  endDate: this.endDate,
+  startTime: this.startTime,
+  endTime: this.endTime,
+  description: this.description
+};
+ 
   
-  var calendarDate = (this.calendar[i][j]?.date);
-  calendarDate =new Date(calendarDate)
+
+ for (let i = 0; i <= this.calendar.length; i++) {
+  console.log(this.calendar[i]);
+
+  const start = new Date(this.startDate);
+ const end = new Date(this.endDate);
+  var calendarDate = new Date(this.calendar[i].date);
+
   if ( calendarDate >=start && calendarDate <= end) {
 
-    newEvent  = {
-      title: this.meetingTitle,
-      startDate: this.startDate,
-      endDate: this.endDate,
-      startTime: this.startTime,
-      endTime: this.endTime,
-      description: this.description
-    };
+   
     
    
 
-    this.calendar[i][j].events.push(newEvent);
-    
-  }
+   
+    this.calendar[i].events.push(newEvent);
 
-}
-       
-      
-      }
-     
-    }
   }
 }
+}
+}
+openEventDialog(event: any): void {
+  this.dialog.open(EventDetailsDialogComponent, {
+    data: event,
+  });
+}
+}
+
 
 

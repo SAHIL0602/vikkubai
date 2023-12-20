@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { ModalModule } from 'ng-modal-lib';
+import { EventDetailsDialogComponent } from './event-details-dialog/event-details-dialog.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ModalModule } from 'ng-modal-lib';
     SignupComponent,
     ChatComponent,
     DashboardComponent,
-    CalenderComponent
+    CalenderComponent,
+    EventDetailsDialogComponent
   ],
   imports: [
     BrowserModule,

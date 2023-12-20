@@ -4,7 +4,7 @@
     [matTooltipPosition]="'above'"
     class="iconsSize ml-1 my-auto"
     
-    (click)="previousmonth()">
+    >
         <mat-icon> 
             chevron_left
         </mat-icon>
@@ -18,23 +18,37 @@
     matTooltip="Next Month"
     [matTooltipPosition]="'above'"
     class="iconsSize ml-1 my-auto"
-    (click)="nextmonth()"
+    
   >
     <mat-icon>
       chevron_right
     </mat-icon>
   </button>
 </div>
-<div *ngFor="let calendarItem of calendar; let i = index">
-  <div class="flex-container flex-center">
-    <div class="calendar-days" [class.weekend]="day.isWeekend" [ngClass]="day.className" *ngFor="let day of calendarItem"  (click)="openModal(day)">
-      <div *ngIf="i === 0">{{day.dayName}}</div>
-      <div > {{day.day}}</div>
+<div class="row">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col-2" *ngFor="let calendarItem of calendar; let i = index" (click)="openModal(calendarItem)" ngClass="calendar-days"  >
+        
+          <div class="flex-container flex-column flex-center">
+              <div >{{calendarItem.dayName}}</div>
+              <div > {{calendarItem.day}}</div>
+              <div *ngFor="let event of calendarItem.events" >
+               <b><span (click)="openEventDialog(event)"> {{ event.title }} </span><br></b>
+                 <small>{{ event.startTime }} to {{ event.endTime }}</small>
+              </div>
+          </div>
 
+
+      </div>
     </div>
+    <div class="col-1"></div>
   </div>
+</div>
 
-  </div>
+
+
   
   <div class="modal" tabindex="-1"     id="exampleModal" >
     <div class="modal-dialog">
