@@ -99,7 +99,7 @@ interface CalendarItem {
   
   openModal(date: CalendarItem){
     this.selectedDate = date;
-    const val = this.selectedDate?.date.split('-')[2] +"-"+ this.selectedDate?.date.split('-')[1] +"-"+ this.selectedDate?.date.split('-')[0]    
+    const val = this.selectedDate?.date.split('-')[0] +"-"+ this.selectedDate?.date.split('-')[1] +"-"+ this.selectedDate?.date.split('-')[2]    
   this.startDate = val
   this.endDate =val
    
@@ -163,34 +163,60 @@ newEvent  = {
   description: this.description
 };
  
-  
+
+const isMonday = (date: Date) => date.getDay() === 1;
+const isWeekday = (date: Date) => date.getDay() >= 1 && date.getDay() <= 5;
+
+const dropdownElement = document.getElementById('dropdown') as HTMLSelectElement | null;
+
+if(dropdownElement){
 
  for (let i = 0; i <= this.calendar.length; i++) {
   console.log(this.calendar[i]);
 
   const start = new Date(this.startDate);
  const end = new Date(this.endDate);
+
   var calendarDate = new Date(this.calendar[i].date);
 
   if ( calendarDate >=start && calendarDate <= end) {
 
-   
+    switch (dropdownElement.value) {
+      case 'opel': 
+        if (isMonday(calendarDate)) {
+          this.calendar[i].events.push(newEvent);
+        }
+        break;
+
+        case 'audi': 
+        if (isWeekday(calendarDate)) {
+          this.calendar[i].events.push(newEvent);
+        }
+        break;
     
-   
+        default:
 
    
     this.calendar[i].events.push(newEvent);
 
   }
+  this.closeModal();
 }
 }
+}
+ }
 }
 openEventDialog(event: any): void {
   this.dialog.open(EventDetailsDialogComponent, {
     data: event,
   });
 }
+meetingTime(startTime: string, endTime: string){
+
+  return `${this.startTime} - ${this.endTime}`;
+
 }
 
 
+  }
 

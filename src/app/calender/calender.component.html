@@ -3,6 +3,7 @@
     matTooltip="Previous Month"
     [matTooltipPosition]="'above'"
     class="iconsSize ml-1 my-auto"
+    (click)="previousmonth"
     
     >
         <mat-icon> 
@@ -18,7 +19,7 @@
     matTooltip="Next Month"
     [matTooltipPosition]="'above'"
     class="iconsSize ml-1 my-auto"
-    
+    (click)="nextmonth"
   >
     <mat-icon>
       chevron_right
@@ -32,13 +33,14 @@
       <div class="col-2" *ngFor="let calendarItem of calendar; let i = index" (click)="openModal(calendarItem)" ngClass="calendar-days"  >
         
           <div class="flex-container flex-column flex-center">
-              <div >{{calendarItem.dayName}}</div>
-              <div > {{calendarItem.day}}</div>
+              <div *ngIf="i < 7">{{calendarItem.dayName}}</div>
+              <div>{{calendarItem.day}}</div>
+            </div>
               <div *ngFor="let event of calendarItem.events" >
-               <b><span (click)="openEventDialog(event)"> {{ event.title }} </span><br></b>
-                 <small>{{ event.startTime }} to {{ event.endTime }}</small>
+               <div (click)="openEventDialog(event)" style="background-color: rgb(3, 155, 229); color: aliceblue;font-size: 12px;border-radius: 3px; margin-top: 5px;" [title]="meetingTime(event.startTime, event.endTime)"> {{ event.title }} </div>
+                
               </div>
-          </div>
+         
 
 
       </div>
@@ -92,9 +94,11 @@
           </div>
         </div>
         <select name="dropdown" id="dropdown">
-          <option value="volvo">Does not repeat</option>
+          
           <option value="saab">Daily</option>
           <option value="opel">Weekly on Monday</option>
+          <option value="opel">Monthly on Monday</option>
+          <option value="opel">Annualy on Monday</option>
           <option value="audi">Every weekday (Monday to Friday)</option>
           <option value="audi">Custom...</option>
 
