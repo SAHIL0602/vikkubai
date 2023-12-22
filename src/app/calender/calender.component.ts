@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { EventDetailsDialogComponent } from '../event-details-dialog/event-details-dialog.component';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 interface CalendarItem {
@@ -21,7 +22,7 @@ interface CalendarItem {
 
  
   export class CalenderComponent implements OnInit {
-    constructor(private dialog: MatDialog) {}
+    constructor(private dialog: MatDialog, private firestore: AngularFirestore) {}
 
   date = moment();
   calendar:any[] = [];
@@ -185,12 +186,16 @@ if(dropdownElement){
       case 'opel': 
         if (isMonday(calendarDate)) {
           this.calendar[i].events.push(newEvent);
+          this.firestore.collection('events').add(newEvent);
+
         }
         break;
 
         case 'audi': 
         if (isWeekday(calendarDate)) {
           this.calendar[i].events.push(newEvent);
+          this.firestore.collection('events').add(newEvent);
+
         }
         break;
     
@@ -198,13 +203,19 @@ if(dropdownElement){
 
    
     this.calendar[i].events.push(newEvent);
-
+    this.firestore.collection('events').add(newEvent)
+      break;
   }
+  
+    
+     
+    
   this.closeModal();
 }
 }
 }
- }
+ 
+}
 }
 openEventDialog(event: any): void {
   this.dialog.open(EventDetailsDialogComponent, {
@@ -218,5 +229,5 @@ meetingTime(startTime: string, endTime: string){
 }
 
 
-  }
-
+  
+}

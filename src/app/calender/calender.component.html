@@ -3,7 +3,7 @@
     matTooltip="Previous Month"
     [matTooltipPosition]="'above'"
     class="iconsSize ml-1 my-auto"
-    (click)="previousmonth"
+    (click)="previousmonth()"
     
     >
         <mat-icon> 
@@ -19,7 +19,7 @@
     matTooltip="Next Month"
     [matTooltipPosition]="'above'"
     class="iconsSize ml-1 my-auto"
-    (click)="nextmonth"
+    (click)="nextmonth()"
   >
     <mat-icon>
       chevron_right
@@ -37,7 +37,7 @@
               <div>{{calendarItem.day}}</div>
             </div>
               <div *ngFor="let event of calendarItem.events" >
-               <div (click)="openEventDialog(event)" style="background-color: rgb(3, 155, 229); color: aliceblue;font-size: 12px;border-radius: 3px; margin-top: 5px;" [title]="meetingTime(event.startTime, event.endTime)"> {{ event.title }} </div>
+               <div  class="event-item" (click)="openEventDialog(event);  $event.stopPropagation()"  [title]="meetingTime(event.startTime, event.endTime)"> {{ event.title }} </div>
                 
               </div>
          

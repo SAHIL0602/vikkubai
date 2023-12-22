@@ -54,3 +54,11 @@
   width: 25%;
 
 }
+.event-item {
+  background-color: rgb(3, 155, 229);
+  color: aliceblue;
+  font-size: 12px;
+  border-radius: 3px;
+  margin-top: 5px;
+  cursor: pointer; 
+}
