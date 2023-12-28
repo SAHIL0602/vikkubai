@@ -46,7 +46,7 @@ export class AuthService {
   getMessagesByEmail(e: any) {
     return new Promise<any>((resolve) => {
       this.db
-        .collection('UserChat', (ref) => ref.where('reciever', '==', e))
+        .collection('UserChat', (ref) => ref.where('reciever', '==', e).orderBy('timestamp'))
         .valueChanges()
         .subscribe((users) => resolve(users));
     });

@@ -26,4 +26,11 @@ export class AppComponent {
 
        
   }
+  ngOnInit() {
+    const lastVisitedRoute = localStorage.getItem('lastVisitedRoute');
+    
+    if (lastVisitedRoute) {
+      this.router.navigateByUrl(lastVisitedRoute);
+    }
+  }
 }

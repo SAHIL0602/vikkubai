@@ -93,12 +93,12 @@
             {standalone: true}">
           </div>
         </div>
-        <select name="dropdown" id="dropdown">
+        <select name="dropdown" id="dropdown" >
           
           <option value="saab">Daily</option>
-          <option value="opel">Weekly on Monday</option>
-          <option value="opel">Monthly on Monday</option>
-          <option value="opel">Annualy on Monday</option>
+          <option value="weekly">Weekly on {{selectedDayOfWeek}}</option>
+          <option value="monthly">Monthly on {{selectedDayOfMonth}}</option>
+          <option value="annualy">Annualy on {{onSelectedDate}}</option>
           <option value="audi">Every weekday (Monday to Friday)</option>
           <option value="audi">Custom...</option>
 

@@ -39,9 +39,13 @@ interface CalendarItem {
   endDate: any ;
   events:any[] = []
   description: string = " ";
+  selectedDayOfWeek: string = ''; // 
+selectedDayOfMonth: string = ''; 
+onSelectedDate: string = '';
 
   ngOnInit(): void {
     this.createCalendar(this.date);
+    
   }
 
   createCalendar(month: moment.Moment) {
@@ -146,9 +150,10 @@ console.log(this.startDate,this.selectedDate);
 
 saveMeeting(){
 
-  
-console.log(this.selectedDate );
 
+
+console.log(this.selectedDate );
+  
 
     if (this.selectedDate) {
 console.log(this.calendar);
@@ -164,8 +169,8 @@ newEvent  = {
   description: this.description
 };
  
-
 const isMonday = (date: Date) => date.getDay() === 1;
+
 const isWeekday = (date: Date) => date.getDay() >= 1 && date.getDay() <= 5;
 
 const dropdownElement = document.getElementById('dropdown') as HTMLSelectElement | null;
@@ -183,12 +188,13 @@ if(dropdownElement){
   if ( calendarDate >=start && calendarDate <= end) {
 
     switch (dropdownElement.value) {
-      case 'opel': 
-        if (isMonday(calendarDate)) {
-          this.calendar[i].events.push(newEvent);
-          this.firestore.collection('events').add(newEvent);
+      case 'weekly': 
+      this.selectedDayOfMonth = start.getDate().toString();
+      if (isMonday(calendarDate)) {
+        this.calendar[i].events.push(newEvent);
+        this.firestore.collection('events').add(newEvent);
 
-        }
+      }
         break;
 
         case 'audi': 
@@ -197,7 +203,8 @@ if(dropdownElement){
           this.firestore.collection('events').add(newEvent);
 
         }
-        break;
+  
+          break;
     
         default:
 
