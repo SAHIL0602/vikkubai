@@ -47,13 +47,17 @@ export class ChatComponent {
   async loadChatMessages() {
     if (this.selectedUser && this.selectedUser.email) {
       const chats = await this.authService.getMessagesByEmail(this.selectedUser.email);
-      console.log(chats);
-      
-
-      this.messages = chats;
+  
+      // Filter messages based on both sender and receiver
+      this.messages = chats.filter(
+        (chat: { sender: string; reciever: string; }) =>
+          (chat.sender === this.user.email && chat.reciever === this.selectedUser.email) ||
+          (chat.sender === this.selectedUser.email && chat.reciever === this.user.email)
+      );
+  
       console.log(this.messages);
-      
-    }}
+    }
+  }
   sendMessage() {
     if (this.selectedUser && this.selectedUser.name && this.selectedUser.name !== 'You') {
       const currentDate = new Date();
