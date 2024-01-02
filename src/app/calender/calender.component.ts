@@ -45,6 +45,7 @@ onSelectedDate: string = '';
 
   ngOnInit(): void {
     this.createCalendar(this.date);
+    this.fetchEventsFromFirestore(); 
     
   }
 
@@ -95,11 +96,13 @@ onSelectedDate: string = '';
   public nextmonth() {
     this.date.add(1, 'months');
     this.createCalendar(this.date);
+    this.fetchEventsFromFirestore()
   }
 
   public previousmonth() {
     this.date.subtract(1, 'months');
    this.createCalendar(this.date);
+   this.fetchEventsFromFirestore()
   }
   
   openModal(date: CalendarItem){
@@ -235,6 +238,17 @@ meetingTime(startTime: string, endTime: string){
 
 }
 
+fetchEventsFromFirestore() {
+  this.firestore.collection('events').valueChanges().subscribe((events: any[]) => {
+    this.events = events;
+    this.updateCalendarWithEvents(); 
+  });
+}
 
+updateCalendarWithEvents() {
+  this.calendar.forEach(calendarItem => {
+    calendarItem.events = this.events.filter(event => event.startDate === calendarItem.date);
+  });
+}
   
 }
